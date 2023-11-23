@@ -1,0 +1,25 @@
+<button (click)="sortByLocation()" class="btn ">Sort by location</button>
+<button (click)="sortByName()" class="btn">Sort by Name</button>
+<button (click)="sortByTimeReported()" class="btn">Sort by Time</button>
+<table class="table">
+    <thead>
+        <tr>
+        <th>Location</th>
+        <th>Baddie's Name</th>
+        <th>Time Reported</th>
+        <th>Status</th>
+        <th></th>
+        <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let report of reportList">
+        <td>{{ report.location }}</td>
+        <td>{{ report.name }}</td>
+        <td>{{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }}</td>
+        <td>{{ report.status }}</td>
+        <td>MORE INFO</td>
+        <td (click)="onDelete(report.name, report.time_reported, report.status)">&#10060;</td>
+        </tr>
+    </tbody>
+</table>
