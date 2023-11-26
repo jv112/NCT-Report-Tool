@@ -1,6 +1,10 @@
-<button (click)="sortByLocation()" class="btn ">Sort by location</button>
-<button (click)="sortByName()" class="btn">Sort by Name</button>
-<button (click)="sortByTimeReported()" class="btn">Sort by Time</button>
+<label>Sort By</label>
+<select #select (change)="sortBy(select.value)">
+    <option value="0">None</option>
+    <option value="1">Location</option>
+    <option value="2">Name</option>
+    <option value="3">Time Reported</option>
+</select>
 <table class="table">
     <thead>
         <tr>

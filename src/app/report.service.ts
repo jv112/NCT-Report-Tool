@@ -11,10 +11,10 @@ export class ReportService {
 
   constructor() {
     this.reportList = [
-      new NuisanceReport('John Doe', '123 Main St', 'Jane Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
-      new NuisanceReport('Jane Doe', '123 Main St', 'John Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
-      new NuisanceReport('John Doe', '123 Main St', 'Jane Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
-      new NuisanceReport('Jane Doe', '123 Main St', 'John Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('aohn Doe', '123 Main St', 'Jane Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('bane Doe', '523 Main St', 'John Doe', new Date('2020-09-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('dohn Doe', '323 Main St', 'Jane Doe', new Date('2020-05-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('cane Doe', '223 Main St', 'John Doe', new Date('2020-03-01T12:00:00'), 'This is a test report'),
     ];
   }
 

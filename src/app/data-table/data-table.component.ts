@@ -56,4 +56,20 @@ export class DataTableComponent implements OnInit {
       return a.time_reported.getTime() - b.time_reported.getTime();
     });
   }
+
+  sortBy(value: string): void {
+    switch(value) {
+      case '1':
+        this.sortByLocation();
+        break;
+      case '2':
+        this.sortByName();
+        break;
+      case '3':
+        this.sortByTimeReported();
+        break;
+      default:
+        break;
+    }
+  }
 }

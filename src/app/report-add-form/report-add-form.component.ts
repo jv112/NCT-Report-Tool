@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ReportService } from '../report.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { NuisanceReport } from '../ReportClass';
 import { Router } from '@angular/router';
 import { LocationService } from '../location.service';
@@ -22,20 +22,25 @@ export class ReportAddFormComponent {
 
   constructor(private rs: ReportService, private ls: LocationService, private router: Router) {
     let formControls = {
-      name: new FormControl(),
-      reported_by: new FormControl(),
+      name: new FormControl('',[
+        Validators.required
+      ]),
+      reported_by: new FormControl('',[
+        Validators.required
+      ]),
       location: new FormControl(),
-      desc: new FormControl()
+      desc: new FormControl('',[
+        Validators.required
+      ])
     }
     this.form = new FormGroup(formControls);
     this.locationList = this.ls.getLocationList();
-    this.location = "";
-    }
+    this.location = "none";
+  }
 
   onSubmit(form: FormGroup): void {
     let form_value = form.value;
     let newReport: NuisanceReport;
-    if (this.location === "none") return;
     if (this.location === "select") {
       newReport = new NuisanceReport(form_value.name, form_value.location, form_value.reported_by, new Date(), form_value.desc);
       // add new location to location list
@@ -48,12 +53,24 @@ export class ReportAddFormComponent {
     this.reroute();
   }
 
+  isValidForm(): boolean {
+    if (this.location === "none") return false;
+    if (this.location === "select" && this.latlng == null) return false;
+    return true;
+  }
+
   reroute(): void {
     this.router.navigate(["/reports"])
   }
 
   onSelect(value: string): void {
     this.location = value;
+    if (value !== "select") {
+      this.latlng = null;
+    }
+    if (this.location !== 'select') {
+      this.form.get('location')!.setValue('');
+  }
   };
 
   ngAfterViewInit(): void {

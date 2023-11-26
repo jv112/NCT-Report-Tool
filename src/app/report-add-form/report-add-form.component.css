@@ -10,7 +10,7 @@ form {
 }
 
 #main {
-    margin-top: 10vw;
+    margin-top: 8vw;
 }
 
 #return {
@@ -27,7 +27,7 @@ select {
 }
 
 #map { 
-    height: 500px; 
+    height: 600px; 
     width: 900px;
     border: 2px solid black;
     margin: 0 auto;
