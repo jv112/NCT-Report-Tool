@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NuisanceReport } from './ReportClass';
+import { Location } from './LocationClass';
 
 @Injectable({
   providedIn: 'root'
@@ -10,30 +11,10 @@ export class ReportService {
 
   constructor() {
     this.reportList = [
-      {
-        location: 'Zed',
-        name: 'John',
-        time_reported: new Date(),
-        status: 'RESOLVED'
-      },
-      {
-        location: 'Chennai',
-        name: 'Smith',
-        time_reported: new Date(),
-        status: 'RESOLVED'
-      },
-      {
-        location: 'Dbc',
-        name: 'zmith',
-        time_reported: new Date(),
-        status: 'OPEN'
-      },
-      {
-        location: 'Aef',
-        name: 'Amith',
-        time_reported: new Date(),
-        status: 'RESOLVED'
-      }
+      new NuisanceReport('John Doe', '123 Main St', 'Jane Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('Jane Doe', '123 Main St', 'John Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('John Doe', '123 Main St', 'Jane Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
+      new NuisanceReport('Jane Doe', '123 Main St', 'John Doe', new Date('2020-01-01T12:00:00'), 'This is a test report'),
     ];
   }
 

@@ -1,0 +1,24 @@
+<div id="main" class="d-flex flex-row justify-content-evenly align-items-center">
+    <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit(form)"
+    >
+        <fieldset class="d-grid gap-2 col-12">
+            <legend>CREATE NEW REPORT</legend>
+            <input type="text" placeholder="Baddie's Name" formControlName="name"/>
+            <input type="text" placeholder="Reported by" formControlName="reported_by"/>
+            <select class="input" id="category" #select (change)="onSelect(select.value)">
+                <option value="none">Choose a Location</option>
+                <option value="select">Select on map</option>
+                <option *ngFor="let location of locationList" value="{{ location.location }}">{{ location.location }}</option>
+            </select>
+            <input *ngIf="location === 'select'" type="text" placeholder="Location Name"/>
+            <textarea id="desc" placeholder="Description" rows="5" formControlName="desc"></textarea>
+            <button type="submit" class="btn btn-outline-success">Submit</button>
+        </fieldset>
+    </form>
+    <div>
+        <div id="map"></div>
+    </div>
+</div>
+<button id="return" class="btn btn-outline-primary" (click)="reroute()">BACK</button>

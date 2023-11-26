@@ -2,15 +2,17 @@ import { Component } from '@angular/core';
 import { NuisanceReport } from '../ReportClass';
 import { ReportService } from '../report.service';
 import { OnInit } from '@angular/core';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css']
 })
-export class DataTableComponent implements OnInit{
+export class DataTableComponent implements OnInit {
 
   reportList: NuisanceReport[] = [];
+  password_hash: string = "fcab0453879a2b2281bc5073e3f5fe54";
 
   constructor(private rs: ReportService) {
   }
@@ -21,11 +23,17 @@ export class DataTableComponent implements OnInit{
 
   onDelete(name: string, time_reported: Date, status: string): void {
     if (status === 'OPEN') {
-      alert('Cannot delete an active report');
+      alert('Cannot delete an open report');
       return;
     }
-    if (confirm('Are you sure you want to delete this report?')) {
+    let password = prompt("Please enter the password to delete this report");
+    if (password === null) return;
+    let input_hash = Md5.hashStr(password);
+    if (input_hash === this.password_hash) {
       this.reportList = this.rs.removeReport(name, time_reported.getTime());
+    }
+    else {
+      alert("Incorrect password");
     }
   }
 
