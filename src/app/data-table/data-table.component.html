@@ -1,37 +1,39 @@
-<label>Sort By</label>
+<label>SORT BY</label>
 <select #select (change)="sortBy(select.value)">
     <option value="0">None</option>
     <option value="1">Location</option>
     <option value="2">Name</option>
     <option value="3">Time Reported</option>
 </select>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Location</th>
-            <th>Baddie's Name</th>
-            <th>Time Reported</th>
-            <th>Status</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let report of reportList">
-            <td>{{ report.location }}</td>
-            <td>{{ report.name }}</td>
-            <td>{{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }}</td>
-            <td>{{ report.status }}</td>
-            <td>
-                <a routerLink="/reports/:">MORE INFO</a>
-            </td>
-            <td 
-                (click)="onDelete(report.name, report.time_reported, report.status)" 
-                *ngIf="report.status == 'RESOLVED'; else elseBlock">&#9989;
-            </td>
-            <ng-template #elseBlock>
-                <td (click)="onDelete(report.name, report.time_reported, report.status)">&#10060;</td>
-            </ng-template>
-        </tr>
-    </tbody>
-</table>
+<div class="d-flex align-items-center flex-column">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Location</th>
+                <th>Baddie's Name</th>
+                <th>Time Reported</th>
+                <th>Status</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let report of reportList">
+                <td>{{ report.location }}</td>
+                <td>{{ report.name }}</td>
+                <td>{{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }}</td>
+                <td>{{ report.status }}</td>
+                <td>
+                    <a routerLink="/reports/:">MORE INFO</a>
+                </td>
+                <td 
+                    (click)="onDelete(report.name, report.time_reported, report.status)" 
+                    *ngIf="report.status == 'RESOLVED'; else elseBlock">&#9989;
+                </td>
+                <ng-template #elseBlock>
+                    <td (click)="onDelete(report.name, report.time_reported, report.status)">&#10060;</td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+</div>

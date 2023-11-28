@@ -8,7 +8,7 @@
             <input type="text" placeholder="Baddie's Name" formControlName="name"/>
             <input type="text" placeholder="Reported by" formControlName="reported_by"/>
             <select class="input" id="category" #select (change)="onSelect(select.value)">
-                <option value="none">Choose a Location</option>
+                <option value="none">Choose a location</option>
                 <option value="select">Select on map</option>
                 <option *ngFor="let location of locationList" value="{{ location.location }}">{{ location.location }}</option>
             </select>

@@ -42,12 +42,15 @@ export class ReportAddFormComponent {
     let form_value = form.value;
     let newReport: NuisanceReport;
     if (this.location === "select") {
-      newReport = new NuisanceReport(form_value.name, form_value.location, form_value.reported_by, new Date(), form_value.desc);
       // add new location to location list
+      newReport = new NuisanceReport(form_value.name, form_value.location, form_value.reported_by, new Date(), form_value.desc);
+      this.ls.addLocationNew(new Location(form_value.location, this.latlng.lat, this.latlng.lng));
+      
     }
-    else {
+    else { 
+      // user selected a location from the dropdown
       newReport = new NuisanceReport(form_value.name, this.location, form_value.reported_by, new Date(), form_value.desc);
-      // find the location in the location list and add to the count
+      this.ls.addLocationCount(this.location);
     }
     this.rs.addReport(newReport);
     this.reroute();
@@ -89,6 +92,9 @@ export class ReportAddFormComponent {
           .openOn(this.map);
         this.latlng = e.latlng;
       }
+    });
+    this.map.on('click', (e: any) => {
+      this.latlng = e.latlng;
     });
   }
 }

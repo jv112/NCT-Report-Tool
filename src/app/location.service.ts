@@ -9,14 +9,22 @@ export class LocationService {
 
   constructor() {
     this.locationList = [
-      new Location('ubc', 49.26, -123.329, 4),
-      new Location('sfu', 49.2780, -122.9146, 2),
+      new Location('UBC Vancouver', 49.25, -123.22),
+      new Location('SFU Burnaby', 49.265, -122.9146),
     ]
   }
 
-  addLocation(location: Location): void {
-    // if (this.locationList.
-    // }
+  addLocationNew(location: Location): void {
+    this.locationList.push(location);
+  }
+
+  addLocationCount(location: string): void {
+    for (let loc of this.locationList) {
+      if (loc.location === location) {
+        loc.count++;
+        return;
+      }
+    }
   }
 
   getLocationList(): Location[] {

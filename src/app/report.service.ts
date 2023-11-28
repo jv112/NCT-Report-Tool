@@ -29,7 +29,7 @@ export class ReportService {
     return this.reportList;
   }
 
-  getReports(): NuisanceReport[] {
+  getReportList(): NuisanceReport[] {
     return this.reportList;
   }
 }

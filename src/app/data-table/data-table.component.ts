@@ -18,7 +18,7 @@ export class DataTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reportList = this.rs.getReports();
+    this.reportList = this.rs.getReportList();
   }
 
   onDelete(name: string, time_reported: Date, status: string): void {

@@ -1,12 +1,12 @@
 export class Location{
     location: string;
-    longitude: number;
-    latitude: number;
+    lat: number;
+    lng: number;
     count: number;
-    constructor(location: string, longitude: number, latitude: number, count: number) {
+    constructor(location: string, latitude: number, longitude: number) {
         this.location = location;
-        this.longitude = longitude;
-        this.latitude = latitude;
-        this.count = count;
+        this.lat = latitude;
+        this.lng = longitude;
+        this.count = 1;
     }
 }
