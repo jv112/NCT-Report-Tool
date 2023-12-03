@@ -1,6 +1,6 @@
 export class NuisanceReport{
   villain_name: string;
-  location: string;
+  location_name: string;
   reported_by: string;
   time_reported: Date;
   status: string
@@ -10,7 +10,7 @@ export class NuisanceReport{
   constructor(name: string, location: string, reported_by: string, time_reported: Date, description: string, url: string)
   {
     this.villain_name = name;
-    this.location = location;
+    this.location_name = location;
     this.reported_by = reported_by;
     this.time_reported = time_reported;
     this.status = "OPEN";

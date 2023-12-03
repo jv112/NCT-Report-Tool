@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import * as L from 'leaflet';
 import { LocationService } from '../location.service';
 import { Location } from '../LocationClass';
@@ -26,8 +26,13 @@ Marker.prototype.options.icon = iconDefault;
 })
 export class MapComponent implements OnInit {
   private map: any;
+  markers = L.layerGroup();
 
-  constructor(private ls: LocationService) {}
+  constructor(private ls: LocationService) {
+    ls.locationDataChanged.subscribe((data: Location[]) => {
+      this.updateMap(data);
+    });
+  }
 
   ngOnInit(): void {
     this.map = L.map('map').setView([49.24, -122.9999], 11);
@@ -36,11 +41,27 @@ export class MapComponent implements OnInit {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
 
+    this.markers.addTo(this.map);
+    
     this.ls.getLocationList().subscribe((data: any) => {
       for (let l of data.data) {
-        L.marker([l.lat, l.lng]).addTo(this.map)
-        .bindPopup("<b>" + l.location + "</b><br />" + l.count.toString() + " nuisance reports");
+        if (l.count > 0) {
+          const marker = L.marker([l.lat, l.lng]).addTo(this.map)
+          .bindPopup("<b>" + l.location_name + "</b><br />" + l.count.toString() + " nuisance reports");
+          this.markers.addLayer(marker);
+        }
       }
     });
+  }
+
+  updateMap(data: Location[]) {
+    this.markers.clearLayers();
+    for (let l of data) {
+      if (l.count > 0) {
+        const marker = L.marker([l.lat, l.lng]).addTo(this.map)
+        .bindPopup("<b>" + l.location_name + "</b><br />" + l.count.toString() + " nuisance reports");
+        this.markers.addLayer(marker);
+      }
+    }
   }
 }

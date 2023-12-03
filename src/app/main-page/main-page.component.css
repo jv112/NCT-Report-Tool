@@ -1,4 +1,4 @@
-div {
+#btn {
     display: flex;
     justify-content: center;
     margin: 15px;
@@ -7,4 +7,9 @@ div {
 #create-btn {
     width: fit-content;
     padding: 0.5vw 2.5vw;
+}
+
+#title {
+    max-width: 10vw;
+    position: absolute;
 }

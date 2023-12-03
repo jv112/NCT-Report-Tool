@@ -19,7 +19,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let report of reportList">
-                <td>{{ report.location }}</td>
+                <td>{{ report.location_name }}</td>
                 <td>{{ report.villain_name }}</td>
                 <td>{{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }}</td>
                 <td>{{ report.status }}</td>

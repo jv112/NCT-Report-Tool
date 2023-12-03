@@ -11,7 +11,7 @@
             <select class="input" id="category" #select (change)="onSelect(select.value)">
                 <option value="none">Choose a location</option>
                 <option value="select">Select on map</option>
-                <option *ngFor="let location of locationList" value="{{ location.location }}">{{ location.location }}</option>
+                <option *ngFor="let l of locationList" value="{{ l.location_name }}">{{ l.location_name }}</option>
             </select>
             <input *ngIf="select_value === 'select'" type="text" placeholder="Location Name" formControlName="location"/>
             <textarea id="desc" placeholder="Description" rows="5" formControlName="desc"></textarea>

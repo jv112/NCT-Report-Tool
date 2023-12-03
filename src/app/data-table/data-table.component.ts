@@ -4,6 +4,7 @@ import { ReportService } from '../report.service';
 import { OnInit } from '@angular/core';
 import { Md5 } from 'ts-md5';
 import { Router } from '@angular/router';
+import { LocationService } from '../location.service';
 
 @Component({
   selector: 'app-data-table',
@@ -14,7 +15,7 @@ export class DataTableComponent implements OnInit {
   reportList: NuisanceReport[] = [];
   password_hash: string = "fcab0453879a2b2281bc5073e3f5fe54";
 
-  constructor(private rs: ReportService, private router: Router) {
+  constructor(private rs: ReportService, private ls: LocationService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -30,7 +31,9 @@ export class DataTableComponent implements OnInit {
     if (password === null) return;
     let input_hash = Md5.hashStr(password);
     if (input_hash === this.password_hash) {
-      this.reportList = this.rs.removeReport(name, time_reported.getTime());
+      let report = this.rs.getReport(time_reported);
+      this.reportList = this.rs.removeReport(report);
+      this.ls.removeLocation(report.location_name);
     }
     else {
       alert("Incorrect password");
@@ -44,7 +47,7 @@ export class DataTableComponent implements OnInit {
   sortByLocation(): void {
     this.reportList = this.reportList.sort((a,b) => 
     { 
-      return a.location < b.location ? -1 : 1; 
+      return a.location_name < b.location_name ? -1 : 1; 
     });
   }
 
