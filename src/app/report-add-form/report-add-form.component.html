@@ -15,7 +15,7 @@
             </select>
             <input *ngIf="select_value === 'select'" type="text" placeholder="Location Name" formControlName="location"/>
             <textarea id="desc" placeholder="Description" rows="5" formControlName="desc"></textarea>
-            <button type="submit" class="btn btn-outline-success" [disabled]="!form.valid">Submit</button>
+            <button type="submit" class="btn btn-outline-success" [disabled]="!form.valid || !isValidForm()">Submit</button>
         </fieldset>
     </form>
     <div>

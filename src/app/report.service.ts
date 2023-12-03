@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 
-export class ReportService{
+export class ReportService {
   reportList: NuisanceReport[] = [];
 
   constructor(private http: HttpClient) {
@@ -14,7 +14,7 @@ export class ReportService{
   }
 
   updateReportList(): void {;
-    this.http.get('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/reportlist/').subscribe((data: any) => {
+    this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`).subscribe((data: any) => {
       for (let r of data.data) {
         this.reportList.push(new NuisanceReport(r.villain_name, r.location, r.reporter_name, new Date(r.time_reported), r.description, r.image_url));
       }
@@ -23,8 +23,8 @@ export class ReportService{
 
   addReport(report: NuisanceReport): void {
     this.reportList.push(report);
-    this.http.put('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/reportlist/',
-    {"key":"reportlist", "data": this.reportList}).subscribe(() => {
+    this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`,
+    {"key": "reportlist", "data": this.reportList}).subscribe(() => {
     });
   }
 
@@ -32,8 +32,8 @@ export class ReportService{
     this.reportList = this.reportList.filter((report) => {
       return report.villain_name !== name || report.time_reported.getTime() !== time_reported;
     });
-    this.http.put('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/reportlist/',
-    {"key":"reportlist", "data": this.reportList}).subscribe(() => {
+    this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`,
+    {"key": "reportlist", "data": this.reportList}).subscribe(() => {
     });
     return this.reportList;
   }
@@ -55,8 +55,8 @@ export class ReportService{
     for (let r of this.reportList) {
       if (r.time_reported.getTime() === time_reported.getTime()) {
         r.status = 'CLOSED';
-        this.http.put('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/reportlist/',
-        {"key":"reportlist", "data": this.reportList}).subscribe(() => {
+        this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`,
+        {"key": "reportlist", "data": this.reportList}).subscribe(() => {
         });
         return;
       }

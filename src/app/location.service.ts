@@ -6,7 +6,6 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LocationService {
-
   locationList: Location[] = [];
 
   constructor(private http: HttpClient) {
@@ -15,7 +14,7 @@ export class LocationService {
 
   updateLocalList(): void {
     this.locationList = [];
-    this.http.get('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/locationlist/').subscribe((data: any) => {
+    this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`).subscribe((data: any) => {
       for (let l of data.data) {
         this.locationList.push(new Location(l.location, l.lat, l.lng, l.count));
       }
@@ -23,7 +22,7 @@ export class LocationService {
   }
 
   getLocationList() {
-    return this.http.get('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/locationlist/');
+    return this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`);
   }
 
   getLocalList(): Location[] {
@@ -32,8 +31,8 @@ export class LocationService {
 
   addLocationNew(location: Location): void {
     this.locationList.push(location);
-    this.http.put('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/locationlist/',
-    {"key":"locationlist", "data": this.locationList}).subscribe(() => {
+    this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`,
+    {"key": "locationlist", "data": this.locationList}).subscribe(() => {
     });
   }
 
@@ -41,8 +40,8 @@ export class LocationService {
     for (let l of this.locationList) {
       if (l.location === location) {
         l.count++;
-        this.http.put('https://272.selfip.net/apps/fc3MyU0pYX/collections/data1/documents/locationlist/',
-        {"key":"locationlist", "data": this.locationList}).subscribe(() => {
+        this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`,
+        {"key": "locationlist", "data": this.locationList}).subscribe(() => {
         });
         return;
       }

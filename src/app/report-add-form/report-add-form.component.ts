@@ -103,6 +103,9 @@ export class ReportAddFormComponent implements OnInit {
           .setContent("You have selected this location")
           .openOn(this.map);
         this.latlng = e.latlng;
+        popup.on("remove", () => {
+          this.latlng = null;
+        });
       }
     });
   }

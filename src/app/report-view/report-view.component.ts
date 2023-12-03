@@ -33,8 +33,10 @@ export class ReportViewComponent {
       alert('Cannot open a closed report');
       return;
     }
+    
     let password = prompt("Please enter the password to change the status of this report");
     if (password === null) return;
+
     let input_hash = Md5.hashStr(password);
     if (input_hash === this.password_hash) {
       this.rs.closeReport(this.report.time_reported);
@@ -47,5 +49,5 @@ export class ReportViewComponent {
   reroute(): void {
     this.router.navigate(["/reports"])
   }
-  
+
 }
