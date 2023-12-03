@@ -1,0 +1,17 @@
+<div id="outer" *ngIf="report.villain_name">
+    <div id="container">
+        <div id="image">
+            <img [src]="image_url"> 
+        </div>
+        <main>
+            <b>Baddie's Name: </b> {{ report.villain_name }} <br>
+            <b>Location: </b> {{ report.location }} <br>
+            <b>Reported by: </b> {{ report.reported_by }} <br>
+            <b>Time: </b> {{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }} <br>
+            <b>Status: </b> {{ report.status }} 
+            <button id="change-btn" (click)="closeReport()">CHANGE</button> <br>
+            <b>Extra Info: </b> <br> {{ report.description }} <br> <br>
+            <button class="btn btn-outline-primary" (click)="reroute()">BACK</button>
+        </main>
+    </div>
+</div>

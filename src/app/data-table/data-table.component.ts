@@ -3,6 +3,7 @@ import { NuisanceReport } from '../ReportClass';
 import { ReportService } from '../report.service';
 import { OnInit } from '@angular/core';
 import { Md5 } from 'ts-md5';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-table',
@@ -10,11 +11,10 @@ import { Md5 } from 'ts-md5';
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements OnInit {
-
   reportList: NuisanceReport[] = [];
   password_hash: string = "fcab0453879a2b2281bc5073e3f5fe54";
 
-  constructor(private rs: ReportService) {
+  constructor(private rs: ReportService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -37,6 +37,10 @@ export class DataTableComponent implements OnInit {
     }
   }
 
+  onView(time_reported: Date): void {
+    this.router.navigate(['/reports/view-report'], { state: { time_reported: time_reported } });
+  }
+
   sortByLocation(): void {
     this.reportList = this.reportList.sort((a,b) => 
     { 
@@ -47,7 +51,7 @@ export class DataTableComponent implements OnInit {
   sortByName(): void {
     this.reportList = this.reportList.sort((a,b) => 
     { 
-      return a.name < b.name ? -1 : 1;
+      return a.villain_name < b.villain_name ? -1 : 1;
     });
   }
   sortByTimeReported(): void {

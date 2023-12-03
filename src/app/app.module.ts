@@ -8,6 +8,8 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { ReportAddFormComponent } from './report-add-form/report-add-form.component';
 import { MapComponent } from './map/map.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { ReportViewComponent } from './report-view/report-view.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,12 +17,14 @@ import { MainPageComponent } from './main-page/main-page.component';
     DataTableComponent,
     ReportAddFormComponent,
     MapComponent,
-    MainPageComponent
+    MainPageComponent,
+    ReportViewComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

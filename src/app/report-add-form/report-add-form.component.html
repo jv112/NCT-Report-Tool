@@ -7,14 +7,15 @@
             <legend>CREATE NEW REPORT</legend>
             <input type="text" placeholder="Baddie's Name" formControlName="name"/>
             <input type="text" placeholder="Reported by" formControlName="reported_by"/>
+            <input type="text" placeholder="Link to image (optional)" formControlName="url"/>
             <select class="input" id="category" #select (change)="onSelect(select.value)">
                 <option value="none">Choose a location</option>
                 <option value="select">Select on map</option>
                 <option *ngFor="let location of locationList" value="{{ location.location }}">{{ location.location }}</option>
             </select>
-            <input *ngIf="location === 'select'" type="text" placeholder="Location Name" formControlName="location"/>
+            <input *ngIf="select_value === 'select'" type="text" placeholder="Location Name" formControlName="location"/>
             <textarea id="desc" placeholder="Description" rows="5" formControlName="desc"></textarea>
-            <button type="submit" class="btn btn-outline-success" [disabled]="!form.valid || !isValidForm()">Submit</button>
+            <button type="submit" class="btn btn-outline-success" [disabled]="!form.valid">Submit</button>
         </fieldset>
     </form>
     <div>
