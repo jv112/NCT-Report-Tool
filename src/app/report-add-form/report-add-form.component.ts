@@ -53,12 +53,12 @@ export class ReportAddFormComponent implements OnInit {
     let locationObs: Observable<any>;
     if (this.select_value === "select") {
       // add new location to location list
-      newReport = new NuisanceReport(form_value.name, form_value.location, form_value.reported_by, new Date(), form_value.desc, form_value.url);
+      newReport = new NuisanceReport(form_value.name, form_value.location, form_value.reported_by, new Date().getTime(), form_value.desc, form_value.url);
       locationObs = this.ls.addLocationNew(new Location(form_value.location, this.latlng.lat, this.latlng.lng));
     }
     else { 
       // user selected a location from the dropdown
-      newReport = new NuisanceReport(form_value.name, this.select_value, form_value.reported_by, new Date(), form_value.desc, form_value.url);
+      newReport = new NuisanceReport(form_value.name, this.select_value, form_value.reported_by, new Date().getTime(), form_value.desc, form_value.url);
       locationObs = this.ls.addLocationCount(this.select_value);
     }
     locationObs.subscribe(() => {

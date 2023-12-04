@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NuisanceReport } from './ReportClass';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,53 +11,50 @@ export class ReportService {
   reportList: NuisanceReport[] = [];
 
   constructor(private http: HttpClient) {
-    this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`).subscribe((data: any) => {
-      for (let r of data.data) {
-        this.reportList.push(new NuisanceReport(r.villain_name, r.location_name, r.reported_by, new Date(r.time_reported), r.description, r.image_url));
-      }
+    this.http.get("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/").subscribe((data: any) => {
+      this.reportList = data.data as NuisanceReport[];
     });
   }
 
   addReport(report: NuisanceReport): void {
     this.reportList.push(report);
-    this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`,
+    this.http.put("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/",
     {"key": "reportlist", "data": this.reportList}).subscribe(() => {
     });
   }
 
   removeReport(report: NuisanceReport): NuisanceReport[] {
     this.reportList = this.reportList.filter((r) => {
-      return report.villain_name !== r.villain_name || report.time_reported.getTime() !== r.time_reported.getTime();
+      return report.villain_name !== r.villain_name || report.time_reported !== r.time_reported;
     });
-    this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`,
+    this.http.put("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/",
     {"key": "reportlist", "data": this.reportList}).subscribe(() => {
     });
     return this.reportList;
   }
 
-  getReport(time_reported: Date): NuisanceReport {
+  getReport(time_reported: number): NuisanceReport {
     for (let r of this.reportList) {
-      if (r.time_reported.getTime() === time_reported.getTime()) {
+      if (r.time_reported === time_reported) {
         return r;
       }
     }
-    return new NuisanceReport('','','', new Date(), '', '');
+    return new NuisanceReport('','','', 0, '', '');
   }
 
-  getReportList(): NuisanceReport[] {
-    return this.reportList;
+  getReportListObs(): Observable<any> {
+    return this.http.get("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/");
   }
 
-  closeReport(time_reported: Date): void {
+  closeReport(time_reported: number): void {
     for (let r of this.reportList) {
-      if (r.time_reported.getTime() === time_reported.getTime()) {
-        r.status = 'CLOSED';
-        this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`,
-        {"key": "reportlist", "data": this.reportList}).subscribe(() => {
-        });
-        return;
+      if (r.time_reported === time_reported) {
+        r.status = "CLOSED";
       }
     }
+    this.http.put("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/",
+        {"key": "reportlist", "data": this.reportList}).subscribe(() => {
+        });
   }
 
 }

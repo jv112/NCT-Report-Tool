@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NuisanceReport } from '../ReportClass';
 import { ReportService } from '../report.service';
-import { OnInit } from '@angular/core';
 import { Md5 } from 'ts-md5';
 import { Router } from '@angular/router';
 import { LocationService } from '../location.service';
@@ -19,10 +18,12 @@ export class DataTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reportList = this.rs.getReportList();
+    this.rs.getReportListObs().subscribe((data: any) => {
+      this.reportList = data.data as NuisanceReport[];
+    });
   }
 
-  onDelete(name: string, time_reported: Date, status: string): void {
+  onDelete(time_reported: number, status: string): void {
     if (status === 'OPEN') {
       alert('Cannot delete an open report');
       return;
@@ -40,7 +41,7 @@ export class DataTableComponent implements OnInit {
     }
   }
 
-  onView(time_reported: Date): void {
+  onView(time_reported: number): void {
     this.router.navigate(['/reports/view-report'], { state: { time_reported: time_reported } });
   }
 
@@ -60,7 +61,7 @@ export class DataTableComponent implements OnInit {
   sortByTimeReported(): void {
     this.reportList = this.reportList.sort((a,b) => 
     { 
-      return a.time_reported.getTime() - b.time_reported.getTime();
+      return a.time_reported - b.time_reported;
     });
   }
 

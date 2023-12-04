@@ -43,14 +43,8 @@ export class MapComponent implements OnInit {
 
     this.markers.addTo(this.map);
     
-    this.ls.getLocationList().subscribe((data: any) => {
-      for (let l of data.data) {
-        if (l.count > 0) {
-          const marker = L.marker([l.lat, l.lng]).addTo(this.map)
-          .bindPopup("<b>" + l.location_name + "</b><br />" + l.count.toString() + " nuisance reports");
-          this.markers.addLayer(marker);
-        }
-      }
+    this.ls.getLocationListObs().subscribe((data: any) => {
+      this.updateMap(data.data as Location[]);
     });
   }
 

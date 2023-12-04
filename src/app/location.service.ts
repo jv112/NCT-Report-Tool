@@ -13,15 +13,13 @@ export class LocationService {
 
   constructor(private http: HttpClient) {
     this.locationList = [];
-    this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`).subscribe((data: any) => {
-      for (let l of data.data) {
-        this.locationList.push(new Location(l.location_name, l.lat, l.lng, l.count));
-      }
+    this.http.get("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/").subscribe((data: any) => {
+      this.locationList = data.data as Location[];
     });
   }
 
-  getLocationList(): Observable<any> {
-    return this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`);
+  getLocationListObs(): Observable<any> {
+    return this.http.get("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/");
   }
 
   getLocalList(): Location[] {
@@ -31,7 +29,7 @@ export class LocationService {
   addLocationNew(location: Location): Observable<any> {
     this.locationList.push(location);
     this.locationDataChanged.emit(this.locationList);
-     return this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`,
+     return this.http.put("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/",
     {"key": "locationlist", "data": this.locationList});
   }
 
@@ -42,7 +40,7 @@ export class LocationService {
         this.locationDataChanged.emit(this.locationList);
       }
     }
-    return this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`,
+    return this.http.put("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/",
         {"key": "locationlist", "data": this.locationList})
   }
 
@@ -53,7 +51,7 @@ export class LocationService {
       }
     }
     this.locationDataChanged.emit(this.locationList);
-    this.http.put(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/`,
+    this.http.put("https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/locationlist/",
     {"key": "locationlist", "data": this.locationList}).subscribe(() => {
     });
   }

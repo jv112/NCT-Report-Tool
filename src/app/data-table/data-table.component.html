@@ -27,11 +27,11 @@
                     <a id="more-info" (click)="onView(report.time_reported)">MORE INFO</a>
                 </td>
                 <td 
-                    (click)="onDelete(report.villain_name, report.time_reported, report.status)" 
-                    *ngIf="report.status == 'RESOLVED'; else elseBlock">&#9989;
+                    (click)="onDelete(report.time_reported, report.status)" 
+                    *ngIf="report.status == 'CLOSED'; else elseBlock">&#9989;
                 </td>
                 <ng-template #elseBlock>
-                    <td (click)="onDelete(report.villain_name, report.time_reported, report.status)">&#10060;</td>
+                    <td (click)="onDelete(report.time_reported, report.status)">&#10060;</td>
                 </ng-template>
             </tr>
         </tbody>

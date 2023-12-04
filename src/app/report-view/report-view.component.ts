@@ -19,11 +19,11 @@ export class ReportViewComponent {
       const state = navigation!.extras.state;
   
       if (state) {
-          const time_reported: Date = state['time_reported'];
+          const time_reported: number = state['time_reported'];
           this.report = this.rs.getReport(time_reported);
       } 
       else {
-          this.report = new NuisanceReport('','','', new Date(), '', '');
+          this.report = new NuisanceReport('','','', 0, '', '');
       }
       this.image_url = this.report.image_url;
   }
