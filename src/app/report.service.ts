@@ -12,7 +12,7 @@ export class ReportService {
   constructor(private http: HttpClient) {
     this.http.get(`https://272.selfip.net/apps/fc3MyU0pYX/collections/NCTReport/documents/reportlist/`).subscribe((data: any) => {
       for (let r of data.data) {
-        this.reportList.push(new NuisanceReport(r.villain_name, r.location_name, r.reporter_name, new Date(r.time_reported), r.description, r.image_url));
+        this.reportList.push(new NuisanceReport(r.villain_name, r.location_name, r.reported_by, new Date(r.time_reported), r.description, r.image_url));
       }
     });
   }
