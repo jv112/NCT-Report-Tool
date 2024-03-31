@@ -24,14 +24,14 @@
                 <td>{{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }}</td>
                 <td>{{ report.status }}</td>
                 <td>
-                    <a id="more-info" (click)="onView(report.time_reported)">MORE INFO</a>
+                    <a id="more-info" (click)="onView(report.rid)">MORE INFO</a>
                 </td>
                 <td 
-                    (click)="onDelete(report.time_reported, report.status)" 
+                    (click)="onDelete(report)" 
                     *ngIf="report.status == 'CLOSED'; else elseBlock">&#9989;
                 </td>
                 <ng-template #elseBlock>
-                    <td (click)="onDelete(report.time_reported, report.status)">&#10060;</td>
+                    <td (click)="onDelete(report)">&#10060;</td>
                 </ng-template>
             </tr>
         </tbody>

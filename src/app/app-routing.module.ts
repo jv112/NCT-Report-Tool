@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReportAddFormComponent } from './report-add-form/report-add-form.component';
-import { MainPageComponent } from './main-page/main-page.component';
-import { ReportViewComponent } from './report-view/report-view.component';
+import { ReportAddFormComponent } from './components/report-add-form/report-add-form.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { ReportViewComponent } from './components/report-view/report-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/reports', pathMatch: 'full'},

@@ -1,7 +1,7 @@
-<div id="outer" *ngIf="report.villain_name">
+<div id="outer" *ngIf="report">
     <div id="container">
         <div id="image">
-            <img [src]="image_url"> 
+            <img [src]="report.image_url"> 
         </div>
         <main>
             <b>Baddie's Name: </b> {{ report.villain_name }} <br>

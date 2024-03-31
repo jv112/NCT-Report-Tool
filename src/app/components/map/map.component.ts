@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as L from 'leaflet';
-import { LocationService } from '../location.service';
-import { Location } from '../LocationClass';
+import { LocationService } from '../../service/location.service';
 import { icon, Marker } from 'leaflet';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
@@ -24,15 +23,12 @@ Marker.prototype.options.icon = iconDefault;
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   private map: any;
   markers = L.layerGroup();
+  intervalId: any;
 
-  constructor(private ls: LocationService) {
-    ls.locationDataChanged.subscribe((data: Location[]) => {
-      this.updateMap(data);
-    });
-  }
+  constructor(private ls: LocationService) {}
 
   ngOnInit(): void {
     this.map = L.map('map').setView([49.24, -122.9999], 11);
@@ -40,17 +36,23 @@ export class MapComponent implements OnInit {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(this.map);
-
     this.markers.addTo(this.map);
-    
-    this.ls.getLocationListObs().subscribe((data: any) => {
-      this.updateMap(data.data as Location[]);
-    });
+    this.updateMap();
+    this.intervalId = setInterval(() => {
+      this.updateMap();
+    }, 5000);
   }
 
-  updateMap(data: Location[]) {
+  ngOnDestroy(): void {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+    }
+  }
+
+  async updateMap(): Promise<void> {
+    const locationList = await this.ls.getAllLocations();
     this.markers.clearLayers();
-    for (let l of data) {
+    for (let l of locationList) {
       if (l.count > 0) {
         const marker = L.marker([l.lat, l.lng]).addTo(this.map)
         .bindPopup("<b>" + l.location_name + "</b><br />" + l.count.toString() + " nuisance reports");
@@ -58,4 +60,5 @@ export class MapComponent implements OnInit {
       }
     }
   }
+
 }
