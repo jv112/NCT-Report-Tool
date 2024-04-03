@@ -36,7 +36,7 @@ function initDB() {
         .catch(err => console.error(err));
     pool.query(locationTable)
         .catch(err => console.error(err));
-    console.log('Database initialized');
+    console.log('Connected to database');
 }
 
 const location = {

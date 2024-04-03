@@ -1,17 +1,21 @@
-<div id="outer" *ngIf="report">
-    <div id="container">
-        <div id="image">
-            <img [src]="report.image_url"> 
+<div class="container" *ngIf="report">
+    <div class="vh-100 d-flex flex-column justify-content-center align-items-center">
+        <div class="card">
+            <img [src]="report.image_url" class="card-img-top">
+            <div class="card-body border-top">
+                <h5 class="card-title">Baddie's Name: {{ report.villain_name }}</h5>
+                <p class="card-text">
+                    <b>Location: </b> {{ report.location_name }} <br>
+                    <b>Reported by: </b> {{ report.reported_by }} <br>
+                    <b>Time: </b> {{ report.time_reported | date: 'yyyy-M-dd (h:mm a)' }} <br>
+                    <b>Status: </b> {{ report.status }} <br>
+                    <b>Extra Info: </b> <br> {{ report.description }}
+                </p>
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-primary" (click)="reroute()">BACK</button>
+                    <button class="btn btn-outline-danger" (click)="closeReport()">CHANGE STATUS</button>
+                </div>
+            </div>
         </div>
-        <main>
-            <b>Baddie's Name: </b> {{ report.villain_name }} <br>
-            <b>Location: </b> {{ report.location_name }} <br>
-            <b>Reported by: </b> {{ report.reported_by }} <br>
-            <b>Time: </b> {{ report.time_reported | date: 'yyyy-M-dd  (h:mm a)' }} <br>
-            <b>Status: </b> {{ report.status }} 
-            <button id="change-btn" (click)="closeReport()">CHANGE</button> <br>
-            <b>Extra Info: </b> <br> {{ report.description }} <br> <br>
-            <button class="btn btn-outline-primary" (click)="reroute()">BACK</button>
-        </main>
     </div>
 </div>

@@ -19,7 +19,7 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
         const lid = await db.location.addLocation(req.body);
-        res.json({ message: 'Location added', lid: lid });
+        res.json(lid);
     }
     catch (err) {
         console.log(err);

@@ -1,64 +1,59 @@
 import { Injectable } from '@angular/core';
-import { NuisanceReport } from '../models/ReportClass';
-import { EventEmitter } from '@angular/core';
-import axios from 'axios';
+import { NuisanceReport } from '../models/Report.class';
+import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-
 export class ReportService {
 
-    constructor() {}
+  constructor(private http: HttpClient) {}
 
-    async getReportByRid(rid: number): Promise<NuisanceReport> {
-        return await axios.get(`http://localhost:3000/reports/${rid}`)
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+  getReportByRid(rid: number): Observable<NuisanceReport> {
+    return this.http.get<NuisanceReport>(`http://localhost:3000/reports/${rid}`).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in fetching report'));
+      })
+    );
+  }
 
-    async getAllReports(): Promise<NuisanceReport[]> {
-        return axios.get('http://localhost:3000/reports')
-            .then((response) => {
-                return response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+  getAllReports(): Observable<NuisanceReport[]> {
+    return this.http.get<NuisanceReport[]>('http://localhost:3000/reports').pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in fetching reports'));
+      })
+    );
+  }
 
-    async addReport(report: NuisanceReport): Promise<void> {
-        return axios.post('http://localhost:3000/reports', report)
-            .then(() => {
-                return;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+  addReport(report: NuisanceReport): Observable<void> {
+      return this.http.post<void>('http://localhost:3000/reports', report).pipe(
+        catchError((err) => {
+          console.log(err);
+          return throwError(() => new Error('Error in adding report'));
+        })
+    );
+  }
 
-    async deleteReport(rid: number): Promise<void> {
-        return axios.delete(`http://localhost:3000/reports/${rid}`)
-            .then(() => {
-                return;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+  deleteReport(rid: number): Observable<void> {
+    return this.http.delete<void>(`http://localhost:3000/reports/${rid}`).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in deleting report'));
+      })
+    );
+  }
 
-    async closeReport(rid: number): Promise<void> {
-        return axios.put(`http://localhost:3000/reports/close/${rid}`)
-            .then(() => {
-                return;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }
+  closeReport(rid: number): Observable<void> {
+    return this.http.put<void>(`http://localhost:3000/reports/close/${rid}`, {}).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in closing report'));
+      })
+    );
+  }
 
 }

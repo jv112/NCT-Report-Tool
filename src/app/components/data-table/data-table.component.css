@@ -1,8 +1,12 @@
-label {
-    margin: 8px 9px;
+#map {
+    max-height: 55vh;
+    height: 50vw;
+    border: 2px solid black;
+    width: 100%;
+    user-select: none;
 }
 
-#more-info {
-    text-decoration: underline;
-    color: blue;
+.hover-effect:hover {
+    cursor: pointer;
 }
+

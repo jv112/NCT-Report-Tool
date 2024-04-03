@@ -1,35 +1,25 @@
-fieldset {
-    width: 20vw;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-#main {
-    margin-top: 100px;
-}
-
-#return {
-    position: absolute;
-    bottom: 20px;
-}
-
-input, textarea {
+input, textarea, select {
     padding: 6px 6px;
 }
 
-select {
-    padding: 6px 4px;
+form {
+    width: 300px;
+}
+
+textarea {
+    resize: none;
 }
 
 #map { 
-    height: 35vw; 
+    height: 65vh; 
     width: 55vw;
     border: 2px solid black;
-    margin: 0 auto;
-    user-select: none;
+}
+
+@media screen and (max-width: 1200px) {
+    #map {
+        width: 80vw;
+        height: 400px;
+    }
+    
 }

@@ -9,8 +9,7 @@ export class NuisanceReport{
   description: string;
   image_url: string;
 
-  constructor(rid: number, name: string, lid: number, location: string, reported_by: string, time_reported: number, description: string, url: string, status?: string)
-  {
+  constructor(rid: number, name: string, lid: number, location: string, reported_by: string, time_reported: number, description: string, url: string, status?: string) {
     this.rid = rid;
     this.villain_name = name;
     this.lid = lid;

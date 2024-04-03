@@ -1,53 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Location } from '../models/LocationClass';
-import { EventEmitter } from '@angular/core';
-import axios from 'axios';
+import { Location } from '../models/Location.class';
+import { catchError } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  async getAllLocations(): Promise<Location[]> {
-    return axios.get('http://localhost:3000/location')
-      .then((response) => {
-        return response.data;
+  getAllLocations(): Observable<Location[]> {
+    return this.http.get<Location[]>('http://localhost:3000/location').pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in fetching locations'));
       })
-      .catch((error) => {
-        console.error(error);
-      });
+    );
   }
 
-  async addLocation(location: Location): Promise<number> {
-    return axios.post('http://localhost:3000/location', location)
-      .then((response) => {
-        return response.data.lid;
+  addLocation(location: Location): Observable<number> {
+    return this.http.post<number>('http://localhost:3000/location', location).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in adding location'));
       })
-      .catch((error) => {
-        console.error(error);
-      });
+    );
   }
 
-  async increaseCount(lid: number): Promise<void> {
-    return axios.put(`http://localhost:3000/location/${lid}/increase`)
-      .then(() => {
-        return;
+  increaseCount(lid: number): Observable<void> {
+    return this.http.put<void>(`http://localhost:3000/location/${lid}/increase`, {}).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in increasing count'));
       })
-      .catch((error) => {
-        console.error(error);
-      });
+    );
   }
 
-  async decreaseCount(lid: number): Promise<void> {
-    return axios.put(`http://localhost:3000/location/${lid}/decrease`)
-      .then(() => {
-        return;
+  decreaseCount(lid: number): Observable<void> {
+    return this.http.put<void>(`http://localhost:3000/location/${lid}/decrease`, {}).pipe(
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => new Error('Error in decreasing count'));
       })
-      .catch((error) => {
-        console.error(error);
-      });
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../service/report.service';
-import { NuisanceReport } from '../../models/ReportClass';
+import { NuisanceReport } from '../../models/Report.class';
 import { Router } from '@angular/router';
 import { Md5 } from 'ts-md5';
 
@@ -19,7 +19,7 @@ export class ReportViewComponent implements OnInit {
   ngOnInit(): void {
     if (this.state) {
       const rid: number = this.state['rid'];
-      this.rs.getReportByRid(rid).then((report: NuisanceReport) => {
+      this.rs.getReportByRid(rid).subscribe((report: NuisanceReport) => {
         this.report = report;
       });
     }
@@ -36,7 +36,7 @@ export class ReportViewComponent implements OnInit {
 
     let input_hash = Md5.hashStr(password);
     if (input_hash === this.password_hash) {
-      this.rs.closeReport(this.report.rid).then(() => {
+      this.rs.closeReport(this.report.rid).subscribe(() => {
         this.report.status = 'CLOSED';
       });
     }
