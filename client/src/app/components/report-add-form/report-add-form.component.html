@@ -5,16 +5,16 @@
             <form [formGroup]="form" (ngSubmit)="onSubmit(form)">
                 <legend>CREATE NEW REPORT</legend>
                 <div class="mb-3">
-                    <label for="inputEmail" class="form-label">Email address</label>
-                    <input type="text" formControlName="name" class="form-control" id="inputEmail" />
+                    <label for="inputBaddiesName" class="form-label">Baddie's Name</label>
+                    <input type="text" formControlName="name" class="form-control" id="inputBaddiesName" autocomplete="off"/>
                 </div>
                 <div class="mb-3">
-                    <label for="inputReportedBy" class="form-label">Password</label>
-                    <input type="text" formControlName="reported_by" class="form-control" id="inputReportedBy" />
+                    <label for="inputReportedBy" class="form-label">Reported By</label>
+                    <input type="text" formControlName="reported_by" class="form-control" id="inputReportedBy" autocomplete="off"/>
                 </div>
                 <div class="mb-3">
                     <label for="inputImage" class="form-label">Link to image (optional)</label>
-                    <input type="text" formControlName="url" class="form-control" id="inputImage" />
+                    <input type="text" formControlName="url" class="form-control" id="inputImage" autocomplete="off"/>
                 </div>
                 <div class="mb-3">
                     <select class="w-100" #select (change)="onSelect(select.value)" class="form-control">
@@ -25,7 +25,7 @@
                 </div>
                 <div class="mb-3" *ngIf="select_value === 'select'">
                     <input type="text" placeholder="Location Name" formControlName="location" class="form-control"
-                        id="inputLocation" />
+                        id="inputLocation" autocomplete="off"/>
                 </div>
                 <div class="mb-3">
                     <textarea placeholder="Description" rows="5" formControlName="desc"

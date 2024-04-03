@@ -21,7 +21,7 @@ export class ReportService {
   }
 
   getAllReports(): Observable<NuisanceReport[]> {
-    return this.http.get<NuisanceReport[]>('http://localhost:3000/reports').pipe(
+    return this.http.get<NuisanceReport[]>(`http://localhost:3000/reports`).pipe(
       catchError((err) => {
         console.log(err);
         return throwError(() => new Error('Error in fetching reports'));
@@ -30,7 +30,7 @@ export class ReportService {
   }
 
   addReport(report: NuisanceReport): Observable<void> {
-      return this.http.post<void>('http://localhost:3000/reports', report).pipe(
+      return this.http.post<void>(`http://localhost:3000/reports`, report).pipe(
         catchError((err) => {
           console.log(err);
           return throwError(() => new Error('Error in adding report'));

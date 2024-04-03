@@ -12,7 +12,7 @@ export class LocationService {
   constructor(private http: HttpClient) {}
 
   getAllLocations(): Observable<Location[]> {
-    return this.http.get<Location[]>('http://localhost:3000/location').pipe(
+    return this.http.get<Location[]>(`http://localhost:3000/location`).pipe(
       catchError((err) => {
         console.log(err);
         return throwError(() => new Error('Error in fetching locations'));
@@ -21,7 +21,7 @@ export class LocationService {
   }
 
   addLocation(location: Location): Observable<number> {
-    return this.http.post<number>('http://localhost:3000/location', location).pipe(
+    return this.http.post<number>(`http://localhost:3000/location`, location).pipe(
       catchError((err) => {
         console.log(err);
         return throwError(() => new Error('Error in adding location'));
