@@ -26,27 +26,27 @@ This application is built with the following technologies:
 
 ## Run Application Using Docker
 
-Install Docker Desktop if you haven't already.
-
 To run the application using Docker, follow these steps:
 
-1. Build the Docker image by running the following command in the project directory:
+1. Install Docker Desktop if you haven't already.
+
+2. Download the docker-compose.yaml file in the root folder
+
+3. Pull the Docker image by running the following command in your terminal:
+    ```bash
+    docker pull jv112/nct
     ```
-    docker build -t nct-report-tool .
+
+4. Start the application using Docker Compose by running the following command in your terminal:
+    ```bash
+    docker compose up
     ```
 
-2. Once the image is built, you can run the container using the following command:
-    ```
-    docker run -p 8080:80 nct-report-tool
-    ```
+5. Open your browser and navigate to `http://localhost:3000/` to access the application.
 
-3. Open your browser and navigate to `http://localhost:8080/` to access the application running inside the Docker container.
+## Development server
 
-## Development Server
-
-To run the application locally, follow these steps:
-
-1. Install the required dependencies by running `npm install` in the project directory.
+5. Open your browser and navigate to `http://localhost:4200/` to access the application. The application will automatically reload if you change any of the source files.
 2. Start the development server by running `ng serve`.
 3. Open your browser and navigate to `http://localhost:4200/` to access the application. The application will automatically reload if you change any of the source files.
 
