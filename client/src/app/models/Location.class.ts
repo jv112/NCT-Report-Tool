@@ -1,4 +1,4 @@
-export class Location{
+export class Location {
     lid: number;
     location_name: string;
     lat: number;

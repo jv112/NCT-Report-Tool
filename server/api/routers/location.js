@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const db = require('../Db');
+import Db from '../Db.js';
 
 // Get all locations
 router.get('/', async (req, res) => {
     try {
-        const location = await db.location.getLocationList();
+        const location = await Db.location.getLocationList();
         res.json(location);
     }
     catch (err) {
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 // Add a location
 router.post('/', async (req, res) => {
     try {
-        const lid = await db.location.addLocation(req.body);
+        const lid = await Db.location.addLocation(req.body);
         res.json(lid);
     }
     catch (err) {
@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 // Increase the count of a location by 1
 router.put('/:lid/increase', async (req, res) => {
     try {
-        await db.location.increaseLocationCount(req.params.lid);
+        await Db.location.increaseLocationCount(req.params.lid);
         res.json({ message: 'Location count increased' });
     }
     catch (err) {
@@ -42,7 +42,7 @@ router.put('/:lid/increase', async (req, res) => {
 // Decrease the count of a location by 1
 router.put('/:lid/decrease', async (req, res) => {
     try {
-        await db.location.decreaseLocationCount(req.params.lid);
+        await Db.location.decreaseLocationCount(req.params.lid);
         res.json({ message: 'Location count decreased' });
     }
     catch (err) {
@@ -51,4 +51,4 @@ router.put('/:lid/decrease', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

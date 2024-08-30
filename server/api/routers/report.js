@@ -1,12 +1,12 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
 
-const db = require('../Db');
+import Db from '../Db.js';
 
 // Get report by rid
 router.get('/:rid', async (req, res) => {
     try {
-        const report = await db.report.getReport(req.params.rid);
+        const report = await Db.report.getReport(req.params.rid);
         res.json(report);
     }
     catch (err) {
@@ -18,7 +18,7 @@ router.get('/:rid', async (req, res) => {
 // Get all reports
 router.get('/', async (req, res) => {
     try {
-        const reports = await db.report.getAllReports();
+        const reports = await Db.report.getAllReports();
         res.json(reports);
     }
     catch (err) {
@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
 // Add a report
 router.post('/', async (req, res) => {
     try {
-        await db.report.addReport(req.body);
+        await Db.report.addReport(req.body);
         res.json({ message: 'Report added' });
     }
     catch (err) {
@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
 // Delete a report
 router.delete('/:rid', async (req, res) => {
     try {
-        await db.report.removeReport(req.params.rid);
+        await Db.report.removeReport(req.params.rid);
         res.json({ message: 'Report deleted' });
     }
     catch (err) {
@@ -54,7 +54,7 @@ router.delete('/:rid', async (req, res) => {
 // Close a report
 router.put('/close/:rid', async (req, res) => {
     try {
-        await db.report.closeReport(req.params.rid);
+        await Db.report.closeReport(req.params.rid);
         res.json({ message: 'Report closed' });
     }
     catch (err) {
@@ -63,4 +63,4 @@ router.put('/close/:rid', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

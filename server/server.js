@@ -1,13 +1,12 @@
-const express = require('express');
+import express from 'express';
+import cors from 'cors';
+
+import Db from './api/Db.js';
+import locationRouter from './api/routers/location.js';
+import reportRouter from './api/routers/report.js';
+
 const app = express();
-const cors = require('cors');
-
 const port = 3000;
-
-const { initDB } = require('./api/Db');
-
-const locationRouter = require('./api/routers/location');
-const reportRouter = require('./api/routers/report');
 
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
@@ -18,5 +17,7 @@ app.use('/reports', reportRouter);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
-    initDB();
+    Db.initDB();
 });
+
+export default app;

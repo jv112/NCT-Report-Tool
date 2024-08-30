@@ -1,11 +1,11 @@
-export class NuisanceReport{
+export class NuisanceReport {
   rid: number;
   villain_name: string;
   lid: number;
   location_name: string;
   reported_by: string;
   time_reported: number;
-  status: string
+  status: string // OPEN, CLOSED
   description: string;
   image_url: string;
 

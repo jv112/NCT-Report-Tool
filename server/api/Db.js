@@ -1,6 +1,8 @@
-const { Pool } = require('pg');
+import pkg from 'pg';
+const { Pool } = pkg;
 
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
 
 const pool = new Pool({
     host: process.env.DB_HOST,
@@ -181,4 +183,10 @@ const report = {
 
 }
 
-module.exports = { initDB, location, report }
+const Db = {
+    initDB,
+    location,
+    report
+}
+
+export default Db;
