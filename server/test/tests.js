@@ -55,7 +55,7 @@ describe('Location API', () => {
 });
 
 describe('Report API', () => {
-    it('Add a report on POST /report and return the RID', done => {
+    it('Add a report on POST /report', done => {
         server.request.execute(app)
             .post('/reports')
             .send({
