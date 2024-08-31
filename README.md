@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.
 
-## Technologies
+## Frameworks and Libaries
 
 - [Angular](https://angular.io/)
 - [Bootstrap](https://getbootstrap.com/)
