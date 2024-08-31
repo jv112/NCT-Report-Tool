@@ -2,6 +2,17 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.9.
 
+## Technologies
+
+- [Angular](https://angular.io/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Leaflet](https://leafletjs.com/)
+- [Node.js](https://nodejs.org/)
+- [Express](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Chai](https://www.chaijs.com/)
+- [Mocha](https://mochajs.org/)
+
 ## Project Description
 
 The NCT Report Tool is a web application developed for users to report villains or bad guys in Metro Vancouver and manage the status of the reports.
